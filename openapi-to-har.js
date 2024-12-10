@@ -491,6 +491,9 @@ const parseParametersToQuery = function (
 
   for (let i in parameters) {
     let param = parameters[i];
+    if (param.in === 'query' && param.required === false) {
+        continue;
+    }
     if (typeof param['$ref'] === 'string' && /^#/.test(param['$ref'])) {
       param = resolveRef(openApi, param['$ref']);
     }
